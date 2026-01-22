@@ -1,7 +1,5 @@
 # Google-Chrome Requirements- Vulnerability Remediation
 
-You want me to create two queries for SCCM (Microsoft Configuration Manager):
-
 1. **WQL Query** - For use in creating a dynamic device collection rule in the SCCM console
 2. **SQL Query** - For direct validation against the SCCM database
 
