@@ -1,4 +1,6 @@
-# Google-Chrome Requirements- Vulnerability Remediation
+# Google-Chrome Vulnerability Remediation
+
+SCCM (Microsoft Configuration Manager):
 
 1. **WQL Query** - For use in creating a dynamic device collection rule in the SCCM console
 2. **SQL Query** - For direct validation against the SCCM database
@@ -41,8 +43,17 @@ AND SMS_G_System_ADD_REMOVE_PROGRAMS_64.DisplayName LIKE "%Google Chrome%"
 ## SQL Query (For Direct Database Validation)
 
 ```sql
-
-
+SELECT DISTINCT 
+    SYS.ResourceID,
+    SYS.Name0 AS [Computer Name],
+    SYS.Operating_System_Name_and0 AS [Operating System],
+    ARP.DisplayName0 AS [Software Name],
+    ARP.Version0 AS [Chrome Version]
+FROM v_R_System SYS
+INNER JOIN v_GS_ADD_REMOVE_PROGRAMS ARP 
+    ON ARP.ResourceID = SYS.ResourceID
+WHERE SYS.Operating_System_Name_and0 LIKE '%Server%'
+    AND ARP.DisplayName0 LIKE '%Google Chrome%'
 
 UNION
 
